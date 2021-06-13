@@ -37,7 +37,6 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
     holder.tvusername.setText(md.getUsername());
     holder.tvgrup.setText(md.getGrup());
     holder.tvnama.setText(md.getNama());
-    holder.tvpassword.setText(md.getPassword());
     holder.md = md;
   }
 
@@ -47,7 +46,7 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
   }
 
   class HolderData extends RecyclerView.ViewHolder {
-    TextView tvusername, tvgrup, tvnama, tvpassword;
+    TextView tvusername, tvgrup, tvnama;
     ModelData md;
 
     public HolderData(View view) {
@@ -55,7 +54,6 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
       tvusername = (TextView) view.findViewById(R.id.username);
       tvgrup = (TextView) view.findViewById(R.id.grup);
       tvnama = (TextView) view.findViewById(R.id.nama);
-      tvpassword = (TextView) view.findViewById(R.id.password);
       view.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -63,11 +61,12 @@ public class AdapterData extends RecyclerView.Adapter<AdapterData.HolderData> {
           update.putExtra("update", 1);
           update.putExtra("username", md.getUsername());
           update.putExtra("grup", md.getGrup());
+          update.putExtra("id_grup", md.getIdGrup());
           update.putExtra("nama", md.getNama());
           update.putExtra("password", md.getPassword());
+          update.putExtra("id", md.getId());
 
           context.startActivity(update);
-
         }
 
       });

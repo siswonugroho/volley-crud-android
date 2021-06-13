@@ -22,7 +22,5 @@
         </activity>
         <activity android:name="com.sovana.crudvolley.InsertData"
             android:label="Insert Data"/>
-        <activity android:name="com.sovana.crudvolley.Delete"
-            android:label="Delete"/>
     </application>
 </manifest>

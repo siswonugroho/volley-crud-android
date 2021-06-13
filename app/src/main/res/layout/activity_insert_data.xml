@@ -6,6 +6,20 @@
     android:padding="10dp">
 
   <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/tilid"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp">
+
+    <EditText
+        android:id="@+id/inp_id"
+        android:inputType="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/text_id_user" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/tilusername"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -41,6 +55,7 @@
         android:id="@+id/inp_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textWebPassword"
         android:hint="@string/text_password" />
   </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +76,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
-      android:orientation="horizontal">
+      android:orientation="horizontal"
+      >
 
     <Button
         android:id="@+id/btn_cancel"
@@ -79,4 +95,12 @@
         android:layout_weight="1"
         android:text="@string/text_simpan" />
   </LinearLayout>
+
+  <Button
+      android:id="@+id/btn_delete"
+      android:layout_width="match_parent"
+      style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+      android:layout_height="wrap_content"
+      android:layout_margin="4dp"
+      android:text="@string/text_delete" />
 </LinearLayout>

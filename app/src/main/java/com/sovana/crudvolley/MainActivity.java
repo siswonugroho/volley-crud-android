@@ -1,10 +1,5 @@
 package com.sovana.crudvolley;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
   RecyclerView.LayoutManager mManager;
   SwipeRefreshLayout refreshLayout;
   List<ModelData> mItems;
-  Button btnInsert, btnDelete;
+  Button btnInsert;
   ProgressDialog pd;
 
   @Override
@@ -46,11 +46,10 @@ public class MainActivity extends AppCompatActivity {
     mRecyclerview = (RecyclerView) findViewById(R.id.recyclerviewTemp);
     refreshLayout = findViewById(R.id.swiperefresh);
     btnInsert = (Button) findViewById(R.id.btn_insert);
-    btnDelete = (Button) findViewById(R.id.btn_delete);
     pd = new ProgressDialog(MainActivity.this);
     mItems = new ArrayList<>();
 
-    loadJson(true);
+    loadJson(false);
 
     mManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
     mRecyclerview.setLayoutManager(mManager);
@@ -65,20 +64,18 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    btnDelete.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent hapus = new Intent(MainActivity.this, Delete.class);
-        startActivity(hapus);
-      }
-    });
-
     refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
         loadJson(false);
       }
     });
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    loadJson(false);
   }
 
 
@@ -105,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     ModelData md = new ModelData();
                     md.setId(data.getString("id"));
                     md.setUsername(data.getString("username"));
+                    md.setIdGrup(data.getString("id_grup"));
                     md.setGrup(data.getString("grup"));
                     md.setNama(data.getString("nama"));
                     md.setPassword(data.getString("password"));
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
               public void onErrorResponse(VolleyError error) {
                 if (showProgress) pd.cancel();
                 else refreshLayout.setRefreshing(false);
-                Toast.makeText(MainActivity.this, "Gagal mendapatkan data.\n" + error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Gagal mendapatkan data", Toast.LENGTH_LONG).show();
                 Log.d("volley", "error:" + error.getMessage());
               }
             });
